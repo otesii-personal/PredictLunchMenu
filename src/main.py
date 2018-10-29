@@ -29,6 +29,7 @@ class Main:
                 menu_array['dessert'][i]
             ]
             repository.insertmenu(date=date, week=i, menu=menu)
+        # repository.getlunchmenu()  # data確認用
         repository.closedatabase()
 
 
