@@ -1,7 +1,7 @@
 # coding: utf-8
 from datetime import datetime, timedelta
 from src.getmenu import GetMenu
-from src.lunchmenu_repository import LunchMenuRepository
+from src.repository.lunchmenu_repository import LunchMenuRepository
 
 
 class Main:
@@ -29,7 +29,7 @@ class Main:
                 menu_array['dessert'][i]
             ]
             repository.insertmenu(date=date, week=i, menu=menu)
-        # repository.getlunchmenu()  # data確認用
+        repository.getlunchmenu()  # data確認用
         repository.closedatabase()
 
 
