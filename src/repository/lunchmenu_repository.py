@@ -32,8 +32,23 @@ class LunchMenuRepository:
         for row in cursor.execute(select_sql):
             print(row)
 
+    def getcurrydayforlearning(self):
+        cursor = self.conn.cursor()
+        res = [[], []]
+        select_sql = "select week from lunch_menu where meat like '%カレー%' or fish like '%カレー%';"
+        response = cursor.execute(select_sql)
+        for row in response:
+            # 曜日番号を元に1週間のうちのカレーの日に1をたてて格納(ex: [0,0,1,0,0,], [0,1,0,0,0], [0,0,0,0,1]...)
+            week = [0, 0, 0, 0, 0]
+            week[row[0]] = 1
+            res[0].append(week)
+
+            res[1].append(row[0])  # 曜日番号を配列に格納
+        print(res)
+        return res
+
 
 if __name__ == '__main__':
     main = LunchMenuRepository()
-    main.createlunchmenutable()
+    main.getlunchmenu()
 

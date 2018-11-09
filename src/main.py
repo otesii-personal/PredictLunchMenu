@@ -2,13 +2,14 @@
 from datetime import datetime, timedelta
 from src.getmenu import GetMenu
 from src.repository.lunchmenu_repository import LunchMenuRepository
+from src.learning import Leraning
 
 
 class Main:
     def __init__(self):
         pass
 
-    def run(self):
+    def getlunchmenu(self):
         getmenu = GetMenu()
         menu_array = getmenu.get_lunch_menu()
         monday_date = datetime.today().date() - timedelta(days=datetime.today().weekday())
@@ -29,10 +30,19 @@ class Main:
                 menu_array['dessert'][i]
             ]
             repository.insertmenu(date=date, week=i, menu=menu)
-        repository.getlunchmenu()  # data確認用
+        repository.getlunchmenu()
         repository.closedatabase()
+
+    def predictcurryday(self):
+        repository = LunchMenuRepository()
+        currydatas = repository.getcurrydayforlearning()
+        repository.closedatabase()
+        learning = Leraning()
+        predict_currydays = learning.predictcurryday(currydatas=currydatas)
+
+        print(predict_currydays)
 
 
 if __name__ == '__main__':
     main = Main()
-    main.run()
+    main.predictcurryday()
