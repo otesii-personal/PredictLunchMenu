@@ -8,4 +8,4 @@
 * SQLite3
 * Headless Chrome
 * selenium
-
+* keras
